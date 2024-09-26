@@ -430,15 +430,20 @@ async def get_data(data_file, proxy_file):
 async def main():
     init()
     banner = f"""{Fore.GREEN}
-   ___                   _      __  __      _                 _ 
-  / _ \ _ _ _ _ _ _  ___| |__  |  \/  |__ _| |_  _ __ _  _ __| |
- | (_) | '_| '_| ' \/ _ \ '_ \ | |\/| / _` | ' \| '  \ || / _` |
-  \___/|_| |_| |_||_\___/_.__/ |_|  |_\__,_|_||_|_|_|_\_,_\__,_|
+░▒▓██████████████▓▒░░▒▓███████▓▒░░▒▓███████▓▒░       ░▒▓████████▓▒░▒▓████████▓▒░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░ 
+░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░   ░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
+░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░   ░▒▓█▓▒░     ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
+░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓███████▓▒░░▒▓███████▓▒░          ░▒▓█▓▒░   ░▒▓██████▓▒░░▒▓█▓▒░      ░▒▓████████▓▒░ 
+░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░                ░▒▓█▓▒░   ░▒▓█▓▒░     ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
+░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░                ░▒▓█▓▒░   ░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
+░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░                ░▒▓█▓▒░   ░▒▓████████▓▒░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░ 
+                                                                                                          
+                                                                                                          
                                                                 
     Auto Claim Bot For Blum - Orrnob's Drop Automation
-    Author  : Orrnob Mahmud : Thanks to @SDSProjects
-    Github  : https://github.com/OrrnobMahmud
-    Telegram: https://t.me/verifiedcryptoairdops
+    Author  : MRP mosibur : Thanks to @Mosibur
+    Github  : https://github.com/mosibur1
+    Telegram: https://t.me/mrptechofficial
         {Style.RESET_ALL}"""
 
     arg = argparse.ArgumentParser()
@@ -476,11 +481,11 @@ async def main():
     if not await aiofiles.ospath.exists(config_file):
         async with aiofiles.open(config_file, "w") as w:
             _config = {
-                "auto_claim": True,
+                "auto_claim": False,
                 "auto_task": True,
                 "auto_game": True,
-                "low": 240,
-                "high": 250,
+                "low": 110,
+                "high": 120,
             }
             await w.write(json.dumps(_config, indent=4))
     while True:
@@ -494,8 +499,8 @@ async def main():
                 auto_task=cfg.get("auto_task"),
                 auto_game=cfg.get("auto_game"),
                 auto_claim=cfg.get("auto_claim"),
-                low=int(cfg.get("low", 240)),
-                high=int(cfg.get("high", 250)),
+                low=int(cfg.get("low", 110)),
+                high=int(cfg.get("high", 120)),
             )
         datas, proxies = await get_data(data_file=args.data, proxy_file=args.proxy)
         menu = f"""
@@ -510,6 +515,10 @@ async def main():
     {green}4{white}.{green}) {white}set game point {green}({config.low}/{config.high})
     {green}5{white}.{green}) {white}start bot (multiprocessing)
     {green}6{white}.{green}) {white}start bot (sync mode)
+    {green}7{white}.{green}) {white}add proxy
+    {green}8{white}.{green}) {white}add query
+    {green}9{white}.{green}) {white}reset query
+    {green}10{white}.{green}) {white}reset proxy
         """
         opt = None
         if args.action:
@@ -587,6 +596,36 @@ async def main():
                 end = int(datetime.now().timestamp())
                 total = min(result) - end
                 await countdown(total)
+        if opt == "7":
+            proxy = input(f"{green}Enter proxy: {white}")
+            async with aiofiles.open(proxy_file, "a") as w:
+                await w.write(f"{proxy}\n")
+            print(f"{green}Proxy added successfully!")
+            input(f"{blue}Press enter to continue")
+            opt = None
+            continue
+        if opt == "8":
+            query = input(f"{green}Enter query: {white}")
+            async with aiofiles.open(data_file, "a") as w:
+                await w.write(f"{query}\n")
+            print(f"{green}Query added successfully!")
+            input(f"{blue}Press enter to continue")
+            opt = None
+            continue
+        if opt == "9":
+            async with aiofiles.open(data_file, "w") as w:
+                await w.write("")
+            print(f"{green}Query file reset successfully!")
+            input(f"{blue}Press enter to continue")
+            opt = None
+            continue
+        if opt == "10":
+            async with aiofiles.open(proxy_file, "w") as w:
+                await w.write("")
+            print(f"{green}Proxy file reset successfully!")
+            input(f"{blue}Press enter to continue")
+            opt = None
+            continue
 
 
 if __name__ == "__main__":

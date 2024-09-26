@@ -1,5 +1,5 @@
 # BlumAuto
-Follow This Installation Guide [https://t.me/verifiedcryptoairdops/167](https://t.me/verifiedcryptoairdops/167)
+Follow This Installation Guide [https://t.me/verifiedcryptoairdops/167](https://t.me/savanop121)
 
 # Warning
 
@@ -183,7 +183,7 @@ You can run the script continuously using a VPS or RDP. Use the screen applicati
 
 # Discussion
 
-If you have any questions or need further assistance, join : [@Crypto Airdrops (Verified Only)](https://t.me/+MCsnE9INs604YWJl)
+If you have any questions or need further assistance, join : [@airdrop script (Verified Only)](https://t.me/savanop121)
 
 ## Q&A
 

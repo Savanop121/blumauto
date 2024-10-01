@@ -431,18 +431,17 @@ async def main():
     init()
     banner = f"""{Fore.YELLOW}
 
-███    ███ ██████  ██████      ████████ ███████  ██████ ██   ██ 
-████  ████ ██   ██ ██   ██        ██    ██      ██      ██   ██ 
-██ ████ ██ ██████  ██████         ██    █████   ██      ███████ 
-██  ██  ██ ██   ██ ██             ██    ██      ██      ██   ██ 
-██      ██ ██   ██ ██             ██    ███████  ██████ ██   ██ 
-                                                                
-                                                                
-                                                                                  
-         Auto Claim Bot For Blum - Orrnob's Drop Automation
-     Author  : MRP mosibur : Thanks to @mosibur_paik
-     Github  : https://github.com/mosibur1
-    Telegram: https://t.me/mrptechofficial
+ ███████╗ █████╗ ██╗   ██╗ █████╗ ███╗   ██╗
+██╔════╝██╔══██╗██║   ██║██╔══██╗████╗  ██║
+███████╗███████║██║   ██║███████║██╔██╗ ██║
+╚════██║██╔══██║╚██╗ ██╔╝██╔══██║██║╚██╗██║
+███████║██║  ██║ ╚████╔╝ ██║  ██║██║ ╚████║
+╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝  ╚═╝╚═╝  ╚═══╝
+                                                                                                  
+    Auto Claim Bot For Major - @savanop
+    Author  : Airdop script  : Thanks to @savan
+    Github  : https://github.com/Savanop121
+    Telegram: https://t.me/savanop121
         {Style.RESET_ALL}"""                                                                                                  
 
 

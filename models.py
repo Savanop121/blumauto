@@ -7,25 +7,13 @@ database = Path(__file__).parent.joinpath("database.sqlite3")
 
 async def insert(id, first_name):
     query = """
-    INSERT INTO "main"."accounts" ("id", "first_name", "balance","token","useragent") VALUES (?,?,?,?,?)
+    INSERT INTO "main"."accounts" ("id", "first_name", "balance","token") VALUES (?,?,?,?)
     """
     values = (
         id,
         first_name,
         None,
         None,
-        None,
-    )
-    async with aiosqlite.connect(database=database) as db:
-        await db.execute(query, values)
-        await db.commit()
-
-
-async def update_useragent(id, useragent):
-    query = """UPDATE "main"."accounts" SET "useragent" = ? WHERE rowid = ?"""
-    values = (
-        useragent,
-        id,
     )
     async with aiosqlite.connect(database=database) as db:
         await db.execute(query, values)
@@ -72,28 +60,24 @@ async def get_by_id(id):
                     "id": result["id"],
                     "first_name": result["first_name"],
                     "balance": result["balance"],
-                    "token": result["token"],
-                    "useragent": result["useragent"],
                 }
 
             return data
 
 
-async def get_all():
-    query = """SELECT "id","first_name","balance" FROM "main"."accounts" """
+async def get_token(id):
+    query = """
+    SELECT "token" FROM "main"."accounts" WHERE rowid = ?
+    """
+    values = (id,)
     async with aiosqlite.connect(database=database) as db:
         db.row_factory = aiosqlite.Row
-        async with db.execute(query) as res:
-            results = await res.fetchall()
-            data = []
-            for r in results:
-                d = {
-                    "id": r["id"],
-                    "first_name": r["first_name"],
-                    "balance": r["balance"],
-                }
-                data.append(d)
-            return data
+        async with db.execute(query, values) as res:
+            result = await res.fetchone()
+
+            if not result:
+                return result
+            return result["token"]
 
 
 async def init():
@@ -106,7 +90,6 @@ CREATE TABLE IF NOT EXISTS "accounts" (
   "first_name" TEXT,
   "balance" TEXT,
   "token" TEXT,
-  "useragent" TEXT,
   PRIMARY KEY ("id")
 );
     """
@@ -121,13 +104,13 @@ PRAGMA foreign_keys = true;
 
 
 async def test():
-    await get_all()
-    # await update_balance(1, 1000000000000)
-    # await update_token(1, "asjdflaskjflaskjdfklajsflkajsdlkfj")
-    # result = await get_by_id(2)
-    # print(result)
-    # print(result)
-    # await insert(2, "akwokoawak")
+    await update_balance(1, 1000000000000)
+    await update_token(1, "asjdflaskjflaskjdfklajsflkajsdlkfj")
+    result = await get_by_id(2)
+    print(result)
+    result = await get_token(1)
+    print(result)
+    await insert(2, "akwokoawak")
 
 
 asyncio.run(init())

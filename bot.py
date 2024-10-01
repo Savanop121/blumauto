@@ -438,7 +438,7 @@ async def main():
 ███████║██║  ██║ ╚████╔╝ ██║  ██║██║ ╚████║
 ╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝  ╚═╝╚═╝  ╚═══╝
                                                                                                   
-    Auto Claim Bot For Major - @savanop
+    Auto Claim Bot For Blum - @savanop
     Author  : Airdop script  : Thanks to @savan
     Github  : https://github.com/Savanop121
     Telegram: https://t.me/savanop121
